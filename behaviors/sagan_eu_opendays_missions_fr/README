@@ -1,0 +1,10 @@
+A behavior that I wrote to explain the Sagan-1 Mars missions to the kids. _FR in French, _EN in English.
+
+Entirely made with Choregraphe, no additional Python scripts needed.
+
+NAO sits or stands and as long as no explanation is running, during this time he tracks faces and noises, turning the head toward the target and following it. The head button behind allows to stand-up and sit down. The front head button starts the explanation text. The challenge was to have all these different actions running in parallel without colliding. Additionally, the sound tracker MUST be disabled when NAO is speaking and the face tracking must be disabled when NAO is moving.
+
+http://vimeo.com/42081592
+http://www.lucubratory.eu/
+http://sagan-project.eu
+
