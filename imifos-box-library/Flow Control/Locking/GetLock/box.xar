@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ChoregrapheBox xar_version="3">
+    <Box name="root" robot="" id="3" tooltip="Tries to obtain the specified Lock and sets the outputs in function of the result. If the Lock is reserved, it remains unmodified. If it&apos;s free, the box reserves it. This operation is not blocking." bitmap_expanded="1" plugin="" x="726" y="211">
+        <script language="4">
+            <content>
+                <![CDATA[class MyClass(GeneratedClass):
+    def __init__(self):
+        GeneratedClass.__init__(self)
+
+    def onLoad(self):
+        pass
+
+    def onUnload(self):
+        pass
+
+    def onInput_onStart(self):
+    
+        self.lockName="lock-"+self.getParameter("LockName")
+        
+        try:
+            self.lock=ALMemory.getData(self.lockName)
+            if (self.lock =="True"):
+                self.NOK()
+                self.onStopped()
+                self.logger.debug("GetLock "+self.lockName+"=NOK");
+            else:
+                ALMemory.insertData(self.lockName,"True") 
+                self.OK()
+                self.onStopped()
+                self.logger.debug("GetLock "+self.lockName+"=OK")
+    
+        except Exception as inst:
+            ALMemory.insertData(self.lockName,"True") 
+            self.OK()
+            self.onStopped()
+            self.logger.debug("GetLock "+self.lockName+"=OK (Initialisation)")
+
+    def onInput_onStop(self):
+        self.onUnload()
+        pass]]>
+</content>
+        </script>
+        <Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when diagram is loaded." id="1" />
+        <Input name="onStart" type="1" type_size="1" nature="2" inner="0" tooltip="Box behavior starts when a signal is received on this input." id="2" />
+        <Input name="onStop" type="1" type_size="1" nature="3" inner="0" tooltip="Box behavior stops when a signal is received on this input." id="3" />
+        <Output name="OK" type="1" type_size="1" nature="2" inner="0" tooltip='The Lock was free and has not been obtained. Now the Lock state is &quot;locked&quot;.' id="4" />
+        <Output name="NOK" type="1" type_size="1" nature="2" inner="0" tooltip="The Lock was reserved by another task and has not been obtained." id="5" />
+        <Output name="onStopped" type="1" type_size="1" nature="1" inner="0" tooltip="" id="6" />
+        <Parameter name="LockName" inherits_from_parent="0" content_type="3" value="testlock" default_value="defaultlock" custom_choice="0" tooltip="" id="7" />
+        <bitmap>E:/dev/workspaces/git/nao-projects/imifos-box-library/Flow Control/Locking/GetLock/LockIcon.png</bitmap>
+    </Box>
+</ChoregrapheBox>
